@@ -292,7 +292,7 @@ public class MemberQuerydslSupportRepository extends Querydsl4RepositorySupport 
 }
 ```
 ##### 간단하게 테스트를 해보자
-'''
+```java
 @Transactional
 @SpringBootTest
 class MemberTestRepositoryTest {
@@ -334,6 +334,8 @@ class MemberTestRepositoryTest {
     }
 }
 ```
+
+
 
 
 - 이를 통해서 기존에 MemberRepositoryImpl 에서 구현한 Pagination 보다 코드의 수가 줄어들고 우리가 딱 필요한 부분까지만 집중할 수 있어서 좋다. 
