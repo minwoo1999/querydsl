@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.data.support.PageableExecutionUtils;
+import org.springframework.stereotype.Service;
 import study.querydsl.dto.MemberSearchCondition;
 import study.querydsl.dto.MemberTeamDto;
 import study.querydsl.dto.QMemberTeamDto;
@@ -21,12 +23,25 @@ import static org.springframework.util.StringUtils.hasText;
 import static study.querydsl.entity.QMember.member;
 import static study.querydsl.entity.QTeam.team;
 
-@RequiredArgsConstructor
+
+@Service
 public class MemberRepositoryImpl implements MemberRepositoryCustom{
 
     private final JPAQueryFactory queryFactory;
 
-    private final EntityManager em;
+
+    public MemberRepositoryImpl(EntityManager em){
+        this.queryFactory=new JPAQueryFactory(em);
+    }
+
+//    /**
+//     * Creates a new {@link QuerydslRepositorySupport} instance for the given domain type.
+//     *
+//     * @param domainClass must not be {@literal null}.
+//     */
+//    public MemberRepositoryImpl(Class<?> domainClass) {
+//        super(Member.class);
+//    }
 
     @Override
     public List<MemberTeamDto> search(MemberSearchCondition condition){
@@ -100,6 +115,8 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
 
 
         return PageableExecutionUtils.getPage(content,pageable,()->countquery.fetchCount());
+        // 컨텐츠사이즈가 페이지사이즈보다 작을 경우  첫페이지나 마지막페이지일 경우 카운트 쿼리를 날리지않음
+
 //        return new PageImpl<>(content,pageable,total);
     }
 //    private BooleanExpression ageBetween(int ageLoe,int ageGoe){

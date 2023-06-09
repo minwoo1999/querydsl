@@ -22,8 +22,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class MemberRepositoryTest {
 
     @Autowired
-
     MemberRepository memberRepository;
+
 
     @Autowired
     EntityManager em;
@@ -104,5 +104,7 @@ class MemberRepositoryTest {
         Assertions.assertThat(result.getSize()).isEqualTo(3);
         Assertions.assertThat(result.getContent()).extracting("username").containsExactly("member1","member2","member3");
     }
+
+
 
 }
