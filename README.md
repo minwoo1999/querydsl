@@ -299,3 +299,7 @@ public class MemberQuerydslSupportRepository extends Querydsl4RepositorySupport 
   - PageableExecutionUtils.getPage() 이 함수를 알지 않아도 된다. 
   
 - 그리고 기존에 select 부터 하지 못하는 단점을 해결해줄 수 있다.   
+
+
+출처- 인프런 https://www.inflearn.com/course/querydsl-%EC%8B%A4%EC%A0%84
+실전! Querydsl
